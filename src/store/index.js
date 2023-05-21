@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import { fetchTodos } from '../sagas/saga';
+import rootSaga from '../sagas/saga';
 import productsReducer from '../reducers';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -16,6 +16,6 @@ const store = configureStore({
   devTools: process.env.NODE_ENV === 'development'
 });
 
-sagaMiddleware.run(fetchTodos);
+sagaMiddleware.run(rootSaga);
 
 export default store;
