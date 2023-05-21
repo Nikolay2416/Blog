@@ -1,0 +1,15 @@
+.active {
+  display: block;
+  position: absolute;
+  z-index: 5;
+  width: 250px;
+  top: 410px;
+  left: 18px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.non_active {
+  display: none;
+}

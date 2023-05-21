@@ -1,6 +1,7 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import { addPosts, fetchPostCommentsStart, fetchPostCommentsSuccess, fetchPostCommentsFailure } from '../reducers';
+import { fetchUserStart, fetchUserSuccess, fetchUserFailure } from '../reducers/user';
 
 export function* fetchPosts() {
   try {
@@ -27,6 +28,21 @@ export function* watchFetchPostComments() {
   yield takeLatest(fetchPostCommentsStart.type, fetchPostComments);
 }
 
+export function* fetchUser(action) {
+  try {
+    const id = action.payload;
+    const response = yield call(axios.get, `https://jsonplaceholder.typicode.com/users/${id}`);
+    const comments = response.data;
+    yield put(fetchUserSuccess(comments));
+  } catch (error) {
+    yield put(fetchUserFailure(error.message));
+  }
+}
+
+export function* watchFetchUser() {
+  yield takeLatest(fetchUserStart.type, fetchUser);
+}
+
 export default function* rootSaga() {
-  yield all([call(fetchPosts), call(watchFetchPostComments)]);
+  yield all([call(fetchPosts), call(watchFetchPostComments), call(watchFetchUser)]);
 }
