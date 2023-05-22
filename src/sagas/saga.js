@@ -1,7 +1,7 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import { addPosts, fetchPostCommentsStart, fetchPostCommentsSuccess, fetchPostCommentsFailure } from '../reducers';
-import { fetchUserStart, fetchUserSuccess, fetchUserFailure } from '../reducers/user';
+import { fetchPostCommentsStart, fetchPostCommentsSuccess, fetchPostCommentsFailure } from '../reducers/commentsReducer';
+import { addPosts, fetchUserStart, fetchUserSuccess, fetchUserFailure } from '../reducers/postsAndUserReducer';
 
 export function* fetchPosts() {
   try {
@@ -46,3 +46,4 @@ export function* watchFetchUser() {
 export default function* rootSaga() {
   yield all([call(fetchPosts), call(watchFetchPostComments), call(watchFetchUser)]);
 }
+

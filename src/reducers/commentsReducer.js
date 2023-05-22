@@ -1,19 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  posts: [],
   commentsPost: [],
   loadingCommentsPost: false,
   errorCommentsPost: null,
 }
 
-const productsReducer = createSlice({
-  name: 'post',
+const commentsReducer = createSlice({
+  name: 'comments',
   initialState,
   reducers: {
-    addPosts(state, action) {
-      state.posts = action.payload;
-    },
     fetchPostCommentsStart(state) {
       state.loadingCommentsPost = true;
     },
@@ -28,14 +24,12 @@ const productsReducer = createSlice({
   }
 });
 
-const {actions, reducer} = productsReducer;
+const {actions, reducer} = commentsReducer;
 
 export const {
-  addPosts,
   fetchPostCommentsStart,
   fetchPostCommentsSuccess,
   fetchPostCommentsFailure
 } = actions;
 
 export default reducer;
-
